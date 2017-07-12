@@ -1,10 +1,10 @@
 on init
 # Enable zRAM and set default LZ4 Algo
-# Swappiness to 10
+# Swappiness to 4
 write /sys/block/zram0/comp_algorithm lz4
 write /proc/sys/vm/swappiness 4
 write /sys/block/zram0/max_comp_streams 4
-write /sys/block/zram0/size 468435456
+write /sys/block/zram0/size 519430400
 
 on property:dev.bootcomplete=1
 
@@ -32,7 +32,7 @@ write /sys/devices/virtual/misc/soundcontrol/volume_boost 6
 write /sys/devices/platform/kcal_ctrl.0/kcal_sat 271
 write /sys/devices/platform/kcal_ctrl.0/kcal_val 256
 write /sys/devices/platform/kcal_ctrl.0/kcal_cont 256
-write /sys/devices/platform/kcal_ctrl.0/kcal "254 252 232"
+write /sys/devices/platform/kcal_ctrl.0/kcal "254 252 252"
 
 # Disable core control and boost parameter
 write /sys/module/msm_thermal/core_control/enabled 0
