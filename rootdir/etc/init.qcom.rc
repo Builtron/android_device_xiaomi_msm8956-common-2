@@ -26,6 +26,7 @@
 #
 
 import init.qcom.power.rc
+import init.ick.rc
 import init.qcom.usb.rc
 import init.target.rc
 
@@ -47,6 +48,9 @@ on init
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
 
+    # Setup zram options
+    write /sys/block/zram0/comp_algorithm lz4
+    write /proc/sys/vm/page-cluster 0
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -63,6 +67,7 @@ on early-boot
 on fs
     wait /dev/block/bootdevice
     mount_all fstab.qcom
+    swapon_all ./fstab.qcom
     write /proc/sys/vm/swappiness 100
     mkdir /persist/data 0700 system system
     restorecon_recursive /persist
